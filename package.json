@@ -4,7 +4,8 @@
   "description": "Employee management using mern stack",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "supervisor index.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/Tola-lemma/Employee-management-using-MERN-stack#readme",
   "dependencies": {
+    "body-parser": "^1.20.2",
     "express": "^4.18.2"
   }
 }
