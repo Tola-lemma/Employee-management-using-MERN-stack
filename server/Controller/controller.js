@@ -28,20 +28,22 @@ exports.createDepartment = (req,res)=>{
         })
 }
 
-// router.post('/', async(req,res)=>{
-//     try {
-//         await client.connect();
-//         const db = client.db(dbName);
-//         const numOfDocs = await db.collection('Department').countDocuments();
-//         const result = await db.collection('Department').insertOne({
-//           DepartmentId: numOfDocs + 1,
-//           DepartmentName: req.body
-//         });
-//         client.close();
-//         res.status(201).send('Added department successfully!');
-//       } catch (error) {
-//         console.error(error);
-//         res.status(500).send('Error adding department to database');
-//       }
-//   })
-// module.exports = router;
+exports.UpdateDepartment = (req,res)=>{
+  if(!req.body){
+    return res
+         .status(404)
+         .send({message:err.message ||`Error while updating the data cannot be empty`});
+ }
+  const id =req.params.id;
+Departdb.findByIdAndUpdate(id,req.body)
+     .then(data=>{
+  if(!data){
+      res.status(404).send({message:err.message ||`cannot update user with identified id ${id} or maybe user not found!`});
+  } else{
+      res.send(data);
+  }
+ })
+ .catch(err =>{
+res.status(500).send({message: err.message || `error updating user information`});
+ })
+}
