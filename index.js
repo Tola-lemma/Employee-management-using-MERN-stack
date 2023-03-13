@@ -1,9 +1,14 @@
 const express = require('express');
 const bodyparser = require('body-parser');
-const client = require('./server/connection')
+const dotenv = require('dotenv');
+const morgan = require('morgan');
+const connectDB = require('./server/database/connection')
 const PORT = process.env.PORT || 3000;
 
 const app = express();
+dotenv.config({path:'config.env'})
+app.use(morgan('tiny'));
+connectDB();
 
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended:true}))
@@ -12,6 +17,7 @@ app.use(bodyparser.urlencoded({ extended:true}))
 app.get('/', (req, res) => {
   res.send("Welcome to Employe management! ");
 })
-app.use('/api/department',require('./Controller/controller'))
+//API
+app.use('/',require('./server/route/router'))
 app.listen(PORT,()=>console.log(`Server is running on port ${PORT} ...`));
 
