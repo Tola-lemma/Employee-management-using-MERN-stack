@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
 
 var department = new mongoose.Schema({
-    DepartmenId: {
-          type: Number,
+    DepartmentId: {
+          type: String,
           required: true,
           unique: true
         },
-        DeparmentName: {
+        DepartmentName: {
           type: String,
           required: true
         }
