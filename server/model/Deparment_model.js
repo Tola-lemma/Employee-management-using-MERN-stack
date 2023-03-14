@@ -11,5 +11,6 @@ var department = new mongoose.Schema({
           required: true
         }
       },{ collection: 'Department' });
+      
 const Departdb = mongoose.model('Departdb', department)
 module.exports = Departdb;
