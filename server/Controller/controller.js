@@ -38,12 +38,27 @@ exports.UpdateDepartment = (req,res)=>{
 Departdb.findByIdAndUpdate(id,req.body)
      .then(data=>{
   if(!data){
-      res.status(404).send({message:err.message ||`cannot update user with identified id ${id} or maybe user not found!`});
+      res.status(404).send({message:err.message ||`cannot update Department with identified id ${id} or maybe user not found!`});
   } else{
       res.send(data);
   }
  })
  .catch(err =>{
-res.status(500).send({message: err.message || `error updating user information`});
+res.status(500).send({message: err.message || `error updating Department information`});
  })
+}
+
+exports.deleteDepartment = (req,res)=>{
+  const id = req.params.id
+  Departdb.findByIdAndDelete(id)
+  .then(data=>{
+    if(!data){
+        res.status(404).send({message:`Cannot delete Department with id ${id} maybe id is wrong!`});
+    }else{
+        res.send({message:`Department was deleted successfully!`});
+    }
+   })
+   .catch(err=>{
+    res.status(500).send({message:`Could not delete Department with id ${id}`});
+   })
 }
