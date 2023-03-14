@@ -2,10 +2,12 @@ const express = require('express');
 const bodyparser = require('body-parser');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
-const connectDB = require('./server/database/connection')
+const connectDB = require('./server/database/connection');
+var fileUpload = require('express-fileupload')
 const PORT = process.env.PORT || 3000;
 
 const app = express();
+app.use(fileUpload());
 dotenv.config({path:'config.env'})
 app.use(morgan('tiny'));
 connectDB();
