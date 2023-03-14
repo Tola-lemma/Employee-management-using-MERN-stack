@@ -1,8 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const controller = require('../Controller/controller')
-router.get('/api/department',controller.getAllDepartment)
-router.post('/api/department',controller.createDepartment)
-router.put('/api/department/:id',controller.UpdateDepartment)
-router.delete('/api/department/:id',controller.deleteDepartment)
+//department
+const departmentController = require('../Controller/department_controller')
+router.get('/api/department',departmentController.getAllDepartment)
+router.post('/api/department',departmentController.createDepartment)
+router.put('/api/department/:id',departmentController.UpdateDepartment)
+router.delete('/api/department/:id',departmentController.deleteDepartment)
+//employee
+const employeeController = require('../Controller/Employee_controller')
+router.get('/api/employee',employeeController.getAllEmployee)
+router.post('/api/employee',employeeController.createEmployee)
+router.put('/api/employee/:id',employeeController.UpdateEmployee)
+router.delete('/api/employee/:id',employeeController.deleteEmployee)
 module.exports = router
