@@ -10,7 +10,7 @@ EmployeeId: {
     type: String,
     required: true
   },
-  Deparment: {
+  Department: {
     type: String,
     required: true
   },
@@ -19,7 +19,8 @@ EmployeeId: {
     required: true
   },
   PhotoFileName: {
-    type: Buffer
+    type: String,
+    required:true
   }
 },{collection:'Employee'});
 const employedb = mongoose.model('employedb',employee)
