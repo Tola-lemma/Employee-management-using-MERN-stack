@@ -18,7 +18,7 @@ const reducer = (state, action) => {
     case "MODAL_TITLE_EDIT_DEPARTMENT":
       return {
         ...state,
-        modalTitle: "Edit Department",
+        modalTitle: "Update Department",
         DepartmentId:action.payload.DepartmentId
       };
     default :return  
