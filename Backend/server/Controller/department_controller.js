@@ -3,7 +3,7 @@ const uuid = require('uuid')
 exports.getAllDepartment=(req,res)=>{
   Departdb.find()
    .then(departement=>{
-    res.send(departement);
+    res.json(departement);
    })
    .catch(err=>{
     res.status(500).send({message:err.message||`Error while retrieving department information`})
@@ -20,8 +20,8 @@ exports.createDepartment = (req,res)=>{
       })
   department.save(department)
             .then(data=>{
-            res.send(data);
-            res.status(201).send('Added department successfully!');
+            res.json(data);
+            res.status(201).json('Added department successfully!');
            })
         .catch(err =>{
         res.status(500).send('Error adding department to database');
@@ -40,7 +40,7 @@ Departdb.findByIdAndUpdate(id,req.body)
   if(!data){
       res.status(404).send({message:err.message ||`cannot update Department with identified id ${id} or maybe user not found!`});
   } else{
-      res.send(data);
+      res.json(data);
   }
  })
  .catch(err =>{
@@ -55,7 +55,7 @@ exports.deleteDepartment = (req,res)=>{
     if(!data){
         res.status(404).send({message:`Cannot delete Department with id ${id} maybe id is wrong!`});
     }else{
-        res.send({message:`Department was deleted successfully!`});
+        res.json({message:`Department was deleted successfully!`});
     }
    })
    .catch(err=>{
