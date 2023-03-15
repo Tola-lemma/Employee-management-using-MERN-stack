@@ -166,7 +166,6 @@ department.map((dep)=>(
                 type:'ADD_DEPARTMENT',
                 payload:{
                     DepartmentName:e.target.value,
-                    DepartmentId: e.target.dataset.id
                 }
               })}/>
               </div>
