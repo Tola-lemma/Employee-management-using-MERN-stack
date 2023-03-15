@@ -8,7 +8,7 @@ exports.EmployeeProfile = (req,res)=>{
          if(err){
            res.send(err)
          }else{
-           res.status(200).send('File Uploaded!')
+           res.status(200).json('File Uploaded!')
          }
        })
      }

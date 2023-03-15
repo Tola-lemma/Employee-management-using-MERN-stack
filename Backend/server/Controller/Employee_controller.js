@@ -3,7 +3,7 @@ const uuid = require('uuid')
 exports.getAllEmployee=(req,res)=>{
     employedb.find()
     .then(employee=>{
-     res.send(employee);
+     res.json(employee);
     })
     .catch(err=>{
      res.status(500).send({message:err.message||`Error while retrieving Employee information`})
@@ -23,8 +23,8 @@ exports.getAllEmployee=(req,res)=>{
       })
   employee.save(employee)
             .then(data=>{
-            res.send(data);
-            res.status(201).send('Added Employee successfully!');
+            res.json(data);
+            res.status(201).json('Added Employee successfully!');
            })
         .catch(err =>{
         res.status(500).send('Error adding Employee to database');
@@ -42,7 +42,7 @@ exports.UpdateEmployee = (req,res)=>{
     if(!data){
         res.status(404).send({message:err.message ||`cannot update Employee with identified id ${id} or maybe user not found!`});
     } else{
-        res.send(data);
+        res.json(data);
     }
    })
    .catch(err =>{
@@ -57,7 +57,7 @@ exports.UpdateEmployee = (req,res)=>{
       if(!data){
           res.status(404).send({message:`Cannot delete Employee with id ${id} maybe id is wrong!`});
       }else{
-          res.send({message:`Employee was deleted successfully!`});
+          res.json({message:`Employee was deleted successfully!`});
       }
      })
      .catch(err=>{
