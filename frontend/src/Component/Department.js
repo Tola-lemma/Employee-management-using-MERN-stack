@@ -64,6 +64,30 @@ export const DepartmentPage = () => {
     },(err)=>alert("Error while Creating Deparment!"))
    }
 //update department
+const handleUpdate = (id) => {
+department.map((dep)=>(
+  dep.DepartmentId===id &&
+  (
+    axios
+      .put(`http://localhost:3000/api/department/${dep._id}`, {
+        DepartmentName: state.DepartmentName,
+      })
+      .then(
+        (res) => {
+          alert("Department updated successfully!");
+        },
+        (err) => {
+          alert("Error while updating the department, please try again!");
+        }
+        )
+   )
+        )
+      );
+};
+
+   
+      
+  
 
   return (
     <div className="table-responsive navbarCustom">
@@ -141,19 +165,23 @@ export const DepartmentPage = () => {
               onChange={(e)=>dispatch({
                 type:'ADD_DEPARTMENT',
                 payload:{
-                    DepartmentName:e.target.value
+                    DepartmentName:e.target.value,
+                    DepartmentId: e.target.dataset.id
                 }
               })}/>
               </div>
+                {/* button to update department  */}
+
+              {state.DepartmentId!==0?
+            <button type="button" className=" btn btn-primary float-start"
+              onClick={()=>handleUpdate(state.DepartmentId)} 
+              > Update</button>
+                 :null
+                }
               {/* button to create new department  */}
               {state.DepartmentId===0?
               <button type="button" className=" btn btn-primary float-start" 
               onClick={handleCreate}> Create</button>
-                 :null
-                }
-                {/* button to update department  */}
-              {state.DepartmentId!==0?
-              <button type="button" className=" btn btn-primary float-start"> Update</button>
                  :null
                 }
             </div>
