@@ -26,9 +26,11 @@ const reducer = (state, action) => {
 };
 export const DepartmentPage = () => {
   const [department, setDepartment] = useState([]);
+  //retrieve data
   axios.get("http://localhost:3000/api/department/").then((res) => {
     setDepartment(res.data);
   });
+
   const [state, dispatch] = useReducer(reducer, {
     modalTitle: "",
     DepartmentName: "",
@@ -54,6 +56,16 @@ export const DepartmentPage = () => {
      }
     })
    }
+//    add department 
+   const handleCreate=()=>{
+    const payload = {DepartmentName:state.DepartmentName}
+    axios.post('http://localhost:3000/api/department/',payload).then((res)=>{
+        alert("The Department is successfully added!")
+        console.log(res.data);
+    },(err)=>alert("Error while Creating Deparment!"))
+   }
+//update department
+
   return (
     <div className="table-responsive navbarCustom">
       <NavBar />
@@ -88,13 +100,13 @@ export const DepartmentPage = () => {
                 >
                   <span>
                     <i className="fa-sharp fa-solid fa-pen-to-square"
-                      style={{ fontSize: " 10px;" }}></i>
+                      style={{ fontSize: "10px" }}></i>
                   </span>
                 </button>
                 <button className="btn btn-sm shadow-lg  rounded-pill ms-2 delete">
                   <span>
                     <i  className="fa-sharp fa-solid fa-trash"
-                      style={{ fontSize: " 12px;" }}></i>
+                      style={{ fontSize: "12px" }}></i>
                   </span>
                 </button>
               </td>
@@ -120,7 +132,7 @@ export const DepartmentPage = () => {
                 aria-label="Close">
               </button>
             </div>
-            <div class="modal-body">
+            <div className="modal-body">
               <div className="input-group mb-3">
               <span className="input-group-text">DepartmentName:</span>
               <input 
@@ -136,7 +148,8 @@ export const DepartmentPage = () => {
               </div>
               {/* button to create new department  */}
               {state.DepartmentId===0?
-              <button type="button" className=" btn btn-primary float-start"> Create</button>
+              <button type="button" className=" btn btn-primary float-start" 
+              onClick={handleCreate}> Create</button>
                  :null
                 }
                 {/* button to update department  */}
