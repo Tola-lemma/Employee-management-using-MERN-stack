@@ -1,7 +1,7 @@
 import { useReducer, useState } from "react";
 import { NavBar } from "../Navigation Bar/header";
 import axios from "axios";
-import { API_URI } from "../API_URL/api_url";
+import { API_URL } from "../API_URL/API_URL";
 const reducer = (state, action) => {
   switch (action.type) {
     case "ADD_DEPARTMENT":
@@ -29,7 +29,7 @@ const reducer = (state, action) => {
 export const DepartmentPage = () => {
   const [department, setDepartment] = useState([]);
   //retrieve data
-  axios.get(API_URI.DEPARTMENT).then((res) => {
+  axios.get(API_URL.DEPARTMENT).then((res) => {
     setDepartment(res.data);
   });
 
@@ -60,7 +60,7 @@ export const DepartmentPage = () => {
    }
 //    add department 
    const handleCreate=()=>{
-    axios.post(API_URI.DEPARTMENT,{DepartmentName:state.DepartmentName}).then((res)=>{
+    axios.post(API_URL.DEPARTMENT,{DepartmentName:state.DepartmentName}).then((res)=>{
         alert("The Department is successfully added!")
         console.log(res.data);
     },(err)=>alert("Error while Creating Deparment!"))
@@ -71,7 +71,7 @@ department.map((dep)=>(
   dep.DepartmentId===id &&
   (
     axios
-      .put(`${API_URI.DEPARTMENT}${dep._id}`, {
+      .put(`${API_URL.DEPARTMENT}${dep._id}`, {
         DepartmentName: state.DepartmentName,
       })
       .then(
@@ -94,7 +94,7 @@ department.map((dep)=>(
       dep.DepartmentId===id &&
       (
         axios
-          .delete(`${API_URI.DEPARTMENT}${dep._id}`)
+          .delete(`${API_URL.DEPARTMENT}${dep._id}`)
           .then(
             (res) => {
               alert("Department deleted successfully!");
