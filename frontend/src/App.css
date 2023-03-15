@@ -5,3 +5,9 @@
   margin: 20px;
   margin-top: 5px;
 }
+.table-hover tbody tr:hover td {
+  background: #06d6a0;
+}
+.rounded-pill:hover{
+background-color: white;
+}
