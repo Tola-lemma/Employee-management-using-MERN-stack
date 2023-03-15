@@ -1,6 +1,7 @@
 import { useReducer, useState } from "react";
 import { NavBar } from "../Navigation Bar/header";
 import axios from "axios";
+import { API_URI } from "../API_URL/api_url";
 const reducer = (state, action) => {
   switch (action.type) {
     case "ADD_DEPARTMENT":
@@ -28,7 +29,7 @@ const reducer = (state, action) => {
 export const DepartmentPage = () => {
   const [department, setDepartment] = useState([]);
   //retrieve data
-  axios.get("http://localhost:3000/api/department/").then((res) => {
+  axios.get(API_URI.DEPARTMENT).then((res) => {
     setDepartment(res.data);
   });
 
@@ -59,7 +60,7 @@ export const DepartmentPage = () => {
    }
 //    add department 
    const handleCreate=()=>{
-    axios.post('http://localhost:3000/api/department/',{DepartmentName:state.DepartmentName}).then((res)=>{
+    axios.post(API_URI.DEPARTMENT,{DepartmentName:state.DepartmentName}).then((res)=>{
         alert("The Department is successfully added!")
         console.log(res.data);
     },(err)=>alert("Error while Creating Deparment!"))
@@ -70,7 +71,7 @@ department.map((dep)=>(
   dep.DepartmentId===id &&
   (
     axios
-      .put(`http://localhost:3000/api/department/${dep._id}`, {
+      .put(`${API_URI.DEPARTMENT}${dep._id}`, {
         DepartmentName: state.DepartmentName,
       })
       .then(
@@ -86,7 +87,28 @@ department.map((dep)=>(
       );
 };
 
-   
+   //delete department
+   const handleDelete = (id) => {
+    if(window.confirm('Are you Sure you want to delete ?')){
+    department.map((dep)=>(
+      dep.DepartmentId===id &&
+      (
+        axios
+          .delete(`${API_URI.DEPARTMENT}${dep._id}`)
+          .then(
+            (res) => {
+              alert("Department deleted successfully!");
+            },
+            (err) => {
+              alert("Error while deleting the department, maybe incorrect id !");
+            }
+            )
+       )
+            )
+          );
+    }
+    };
+    
       
   
 
@@ -127,7 +149,8 @@ department.map((dep)=>(
                       style={{ fontSize: "10px" }}></i>
                   </span>
                 </button>
-                <button className="btn btn-sm shadow-lg  rounded-pill ms-2 delete">
+                <button className="btn btn-sm shadow-lg  rounded-pill ms-2"
+                onClick={()=>handleDelete(state.DepartmentId)}>
                   <span>
                     <i  className="fa-sharp fa-solid fa-trash"
                       style={{ fontSize: "12px" }}></i>
@@ -147,7 +170,7 @@ department.map((dep)=>(
       >
         <div className="modal-dialog modal-lg modal-dialog-centered">
           <div className="modal-content">
-            <div className="modal-header">
+            <div className="modal-header bg-light">
               <h4 className="modal-title">{state.modalTitle}</h4>
               <button
                 type="button"
