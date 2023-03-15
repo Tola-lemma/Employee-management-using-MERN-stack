@@ -58,8 +58,7 @@ export const DepartmentPage = () => {
    }
 //    add department 
    const handleCreate=()=>{
-    const payload = {DepartmentName:state.DepartmentName}
-    axios.post('http://localhost:3000/api/department/',payload).then((res)=>{
+    axios.post('http://localhost:3000/api/department/',{DepartmentName:state.DepartmentName}).then((res)=>{
         alert("The Department is successfully added!")
         console.log(res.data);
     },(err)=>alert("Error while Creating Deparment!"))
