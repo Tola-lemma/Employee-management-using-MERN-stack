@@ -133,7 +133,6 @@ const handleDelete = (id)=>{
                     <th>EmployeeName</th>
                     <th>Department</th>
                     <th>Date of Joining</th>
-                    <th>PhotoFileName</th>
                     <th>Actions</th>
                 </thead>
                 <tbody>
