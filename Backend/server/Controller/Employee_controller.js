@@ -14,19 +14,12 @@ exports.getAllEmployee=(req,res)=>{
       res.status(400).send({message:'Content cannot be empty!'});
       return
   }
-  const inputDate = req.body.Date_of_Joining;
-const dateOnly = inputDate.slice(0, 10);
-
-const formattedDate = new Date(dateOnly).toLocaleDateString('en-US', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric'
-});
+  
   const employee = new employedb({
         EmployeeId: uuid.v4().slice(0,4),
         EmployeeName: req.body.EmployeeName,
         Department: req.body.Department,
-        Date_of_Joining:formattedDate,
+        Date_of_Joining:req.body.Date_of_Joining.slice(0,10),
         PhotoFileName: req.body.PhotoFileName
       })
   employee.save(employee)
