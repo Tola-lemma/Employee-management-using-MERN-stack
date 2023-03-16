@@ -41,6 +41,11 @@ export const EmpoyeePage = ()=>{
          .then((res)=>{
           setEmployee(res.data);
          })
+    const [department,setDepartment] =useState([])
+    axios.get(API_URL.DEPARTMENT)
+         .then((res)=>{
+            setDepartment(res.data)
+         })
 const [state,dispatch] = useReducer(reducer,{
     modalTitle:'',
     EmployeeId:0,
@@ -59,7 +64,7 @@ const addClick=()=>{
             EmployeeName:"",
             Department:'',
             Date_of_Joining:'',
-            PhotoFileName:'anonymous.png'
+            PhotoFileName:"anonymous.png"
         }
     })
 }
@@ -142,7 +147,6 @@ const handleDelete = (id)=>{
               <td data-title="Name">{emp.EmployeeName}</td>
               <td data-title="department">{emp.Department}</td>
               <td data-title="date_of_joining">{emp.Date_of_Joining}</td>
-              <td data-title="photo">{emp.PhotoFileName}</td>
               <td data-title="Action">
                 <button
                  data-bs-toggle="modal"
@@ -186,7 +190,10 @@ const handleDelete = (id)=>{
                 aria-label="Close">
               </button>
             </div>
-            <div className="modal-body">
+         <div className="modal-body">
+                {/* photo  */}
+        <div className="d-flex flex-row bd-highlight mb-3">
+        <div className="p-2 w-50 bd-highlight">
               <div className="input-group mb-3">
               <span className="input-group-text">EmployeeName:</span>
               <input 
@@ -202,16 +209,20 @@ const handleDelete = (id)=>{
               </div>
               <div className="input-group mb-3">
               <span className="input-group-text">Deparment:</span>
-              <input 
-              type="text" 
-              className="form-control" 
-              value={state.Department}
-              onChange={(e)=>dispatch({
-                type:'ADD_EMPLOYEE',
-                payload:{
-                    Department:e.target.value,
-                }
-              })}/>
+               <select className="form-select"
+                onChange={(e)=>dispatch({
+                    type:'ADD_EMPLOYEE',
+                    payload:{
+                        Department:e.target.value,
+                    }
+                  })}
+               value ={state.Department}>
+                   {
+                department.map(dep=><option key={dep._id}>
+                 {dep.DepartmentName}
+                </option>)
+                   }
+               </select>
               </div>
               <div className="input-group mb-3">
               <span className="input-group-text">Date of Joining:</span>
@@ -225,21 +236,14 @@ const handleDelete = (id)=>{
                     Date_of_Joining:e.target.value,
                 }
               })}/>
-              </div>
-              <div className="input-group mb-3">
-              <span className="input-group-text">Profile Photo:</span>
-              <input 
-              type="file" 
-              className="form-control" 
-            //   value={state.PhotoFileName}
-              onChange={(e)=>dispatch({
-                type:'ADD_EMPLOYEE',
-                payload:{
-                    PhotoFileName:e.target.value,
-                }
-              })}
-              />
-              </div>
+            </div>
+        </div>
+            <div className="p-2 w-50 bd-highlight">
+                <img width="250px" height="250px"
+                alt=""
+                src={state.photoPath+state.PhotoFileName}/>
+            </div>
+        </div>
                 {/* button to update department  */}
               {state.EmployeeId!==0?
             <button type="button" className=" btn btn-primary float-start"
@@ -254,6 +258,7 @@ const handleDelete = (id)=>{
               > Create</button>
                  :null
                 }
+            
             </div>
           </div>
         </div>
