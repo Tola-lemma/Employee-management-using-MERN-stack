@@ -1,5 +1,6 @@
 const employedb = require('../model/Employee_model')
 const uuid = require('uuid')
+var format = require('date-format');
 exports.getAllEmployee=(req,res)=>{
     employedb.find()
     .then(employee=>{
@@ -18,7 +19,7 @@ exports.getAllEmployee=(req,res)=>{
         EmployeeId: uuid.v4().slice(0,4),
         EmployeeName: req.body.EmployeeName,
         Department: req.body.Department,
-        Date_of_Joining: req.body.Date_of_Joining,
+        Date_of_Joining: format(req.body.Date_of_Joining),
         PhotoFileName: req.body.PhotoFileName
       })
   employee.save(employee)
