@@ -62,29 +62,25 @@ export const DepartmentPage = () => {
    const handleCreate=()=>{
     axios.post(API_URL.DEPARTMENT,{DepartmentName:state.DepartmentName}).then((res)=>{
         alert("The Department is successfully added!")
-        console.log(res.data);
     },(err)=>alert("Error while Creating Deparment!"))
    }
 //update department
 const handleUpdate = (id) => {
-department.map((dep)=>(
-  dep.DepartmentId===id &&
-  (
-    axios
-      .put(`${API_URL.DEPARTMENT}${dep._id}`, {
-        DepartmentName: state.DepartmentName,
-      })
-      .then(
-        (res) => {
-          alert("Department updated successfully!");
-        },
-        (err) => {
-          alert("Error while updating the department, please try again!");
-        }
+  department.map((dep) =>
+      dep.DepartmentId === id &&
+      axios
+        .put(`${API_URL.DEPARTMENT}${dep._id}`, {
+          DepartmentName: state.DepartmentName,
+        })
+        .then(
+          (res) => {
+            alert("Department updated successfully!");
+          },
+          (err) => {
+            alert("Error while updating the department, please try again!");
+          }
         )
-   )
-        )
-      );
+  );
 };
 
    //delete department
@@ -204,7 +200,7 @@ department.map((dep)=>(
               {/* button to create new department  */}
               {state.DepartmentId===0?
               <button type="button" className=" btn btn-primary float-start" 
-              onClick={handleCreate}> Create</button>
+               onClick={handleCreate}> Create</button>
                  :null
                 }
             </div>
