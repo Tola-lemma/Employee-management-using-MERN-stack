@@ -86,11 +86,8 @@ const handleUpdate = (id) => {
    //delete department
    const handleDelete = (id) => {
     if(window.confirm('Are you Sure you want to delete ?')){
-    department.map((dep)=>(
-      dep.DepartmentId===id &&
-      (
         axios
-          .delete(`${API_URL.DEPARTMENT}${dep._id}`)
+          .delete(`${API_URL.DEPARTMENT}${id}`)
           .then(
             (res) => {
               alert("Department deleted successfully!");
@@ -98,11 +95,8 @@ const handleUpdate = (id) => {
             (err) => {
               alert("Error while deleting the department, maybe incorrect id !");
             }
-            )
-       )
-            )
-          );
-    }
+            );
+         }
     };
     
       
@@ -146,7 +140,7 @@ const handleUpdate = (id) => {
                   </span>
                 </button>
                 <button className="btn btn-sm shadow-lg  rounded-pill ms-2"
-                onClick={()=>handleDelete(state.DepartmentId)}>
+                onClick={()=>handleDelete(dep._id)}>
                   <span>
                     <i  className="fa-sharp fa-solid fa-trash"
                       style={{ fontSize: "12px" }}></i>
