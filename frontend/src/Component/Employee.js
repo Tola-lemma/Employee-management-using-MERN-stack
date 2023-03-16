@@ -106,6 +106,15 @@ const handleUpdate = (id)=>{
        )
  );
 }
+const handleDelete = (id)=>{
+    if(window.confirm('Are you sure you want to delete Employee?')){
+    axios.delete(`${API_URL.EMPLOYEE}${id}`)
+      .then((res)=>{
+        alert('You are Successfully Delete Employee !')
+      },
+      (err)=>alert('Error While Deleting Employee,try again!'))
+    }
+}
     return(
     <div className="table-responsive navbarCustom">
      <NavBar />
@@ -123,7 +132,7 @@ const handleUpdate = (id)=>{
                     <th>EmployeeId</th>
                     <th>EmployeeName</th>
                     <th>Department</th>
-                    <th>Date_of_Joining</th>
+                    <th>Date of Joining</th>
                     <th>PhotoFileName</th>
                     <th>Actions</th>
                 </thead>
@@ -148,7 +157,7 @@ const handleUpdate = (id)=>{
                   </span>
                 </button>
                 <button className="btn btn-sm shadow-lg  rounded-pill ms-2"
-                // onClick={()=>handleDelete(state.EmployeeId)}
+                onClick={()=>handleDelete(emp._id)}
                 >
                   <span>
                     <i  className="fa-sharp fa-solid fa-trash"
