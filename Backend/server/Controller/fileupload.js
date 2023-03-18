@@ -3,12 +3,12 @@ exports.EmployeeProfile = (req,res)=>{
     //    console.log(req.files);
        var file = req.files.file
        var filename = file.name
-    //    console.log(filename);
-       file.mv('./assets/uploads/'+filename,(err)=>{
+      //  console.log(filename);
+       file.mv('./public/profile/'+filename,(err)=>{
          if(err){
            res.send(err)
          }else{
-           res.status(200).json('File Uploaded!')
+           res.status(200).json({msg : 'File Uploaded!', fileName : filename})
          }
        })
      }

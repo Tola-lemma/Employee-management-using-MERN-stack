@@ -14,7 +14,7 @@ router.put('/api/employee/:id',employeeController.UpdateEmployee)
 router.delete('/api/employee/:id',employeeController.deleteEmployee)
 //fileuploads
 const fileUploading = require('../Controller/fileupload')
-router.post('/api/employee/fileupload',fileUploading.EmployeeProfile)
+router.post('/api/fileupload',fileUploading.EmployeeProfile)
 
 
 module.exports = router

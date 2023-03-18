@@ -20,8 +20,7 @@ exports.createDepartment = (req,res)=>{
       })
   department.save(department)
             .then(data=>{
-            res.json(data);
-            res.status(201).json('Added department successfully!');
+            res.status(201).json(data);
            })
         .catch(err =>{
         res.status(500).send('Error adding department to database');

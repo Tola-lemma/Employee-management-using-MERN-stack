@@ -19,16 +19,15 @@ exports.getAllEmployee=(req,res)=>{
         EmployeeId: uuid.v4().slice(0,4),
         EmployeeName: req.body.EmployeeName,
         Department: req.body.Department,
-        Date_of_Joining:req.body.Date_of_Joining.slice(0,10),
+        Date_of_Joining:req.body.Date_of_Joining,
         PhotoFileName: req.body.PhotoFileName
       })
   employee.save(employee)
             .then(data=>{
-            res.json(data);
-            res.status(201).json('Added Employee successfully!');
+            res.status(201).json(data);
            })
-        .catch(err =>{
-        res.status(500).send('Error adding Employee to database');
+      .catch(err =>{
+        res.status(500).json('Error adding Employee to database');
         })
 }
 exports.UpdateEmployee = (req,res)=>{
@@ -40,10 +39,10 @@ exports.UpdateEmployee = (req,res)=>{
     const id =req.params.id;
   employedb.findByIdAndUpdate(id,req.body)
        .then(data=>{
-    if(!data){
-        res.status(404).send({message:err.message ||`cannot update Employee with identified id ${id} or maybe user not found!`});
+    if(data){
+      res.json(data);
     } else{
-        res.json(data);
+      res.status(404).send({message:err.message ||`cannot update Employee with identified id ${id} or maybe user not found!`});
     }
    })
    .catch(err =>{
