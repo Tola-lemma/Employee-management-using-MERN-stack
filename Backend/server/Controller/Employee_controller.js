@@ -9,27 +9,28 @@ exports.getAllEmployee=(req,res)=>{
      res.status(500).send({message:err.message||`Error while retrieving Employee information`})
     });
  }
- exports.createEmployee = (req,res)=>{
-    if(!req.body){
-      res.status(400).send({message:'Content cannot be empty!'});
-      return
+ exports.createEmployee = (req, res) => {
+  if (!req.body) {
+    return res.status(400).json({ message: 'Content cannot be empty!' });
   }
-  
+
   const employee = new employedb({
-        EmployeeId: uuid.v4().slice(0,4),
-        EmployeeName: req.body.EmployeeName,
-        Department: req.body.Department,
-        Date_of_Joining:req.body.Date_of_Joining,
-        PhotoFileName: req.body.PhotoFileName
-      })
-  employee.save(employee)
-            .then(data=>{
-            res.status(201).json(data);
-           })
-      .catch(err =>{
-        res.status(500).json('Error adding Employee to database');
-        })
+    EmployeeId: uuid.v4().slice(0, 4),
+    EmployeeName: req.body.EmployeeName,
+    Department: req.body.Department,
+    Date_of_Joining: req.body.Date_of_Joining,
+    PhotoFileName: req.body.PhotoFileName,
+  });
+
+  employee.save()
+    .then((data) => {
+      res.status(201).json(data);
+    })
+    .catch((err) => {
+      res.status(500).json({ message: 'Error adding Employee to database' });
+    });
 }
+
 exports.UpdateEmployee = (req,res)=>{
     if(!req.body){
       return res

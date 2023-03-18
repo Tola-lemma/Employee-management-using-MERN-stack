@@ -58,7 +58,7 @@ export const EmpoyeePage = () => {
     EmployeeName: "",
     Department: "",
     Date_of_Joining: "",
-    PhotoFileName: "",
+    PhotoFileName: "anonymous.png",
     photoPath: API_URL.photosPath,
   });
   const addClick = () => {
