@@ -297,6 +297,7 @@ export const EmpoyeePage = () => {
                         dispatch({
                           type: "ADD_EMPLOYEE",
                           payload: {
+                            ...state,
                             Date_of_Joining: e.target.value,
                           },
                         })

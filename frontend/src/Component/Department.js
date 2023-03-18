@@ -46,6 +46,7 @@ export const DepartmentPage = () => {
    dispatch({
     type:'MODAL_TITLE_ADD_DEPARTMENT',
     payload:{
+      ...state,
         modalTitle:state.modalTitle,
         DepartmentId:state.DepartmentId,
         DepartmentName:""
@@ -56,6 +57,7 @@ export const DepartmentPage = () => {
     dispatch({
      type:'MODAL_TITLE_EDIT_DEPARTMENT',
      payload:{
+      ...state,
          modalTitle:state.modalTitle,
          DepartmentId:dep.DepartmentId,
          DepartmentName:dep.DepartmentName
@@ -179,6 +181,7 @@ const handleUpdate = (id) => {
               onChange={(e)=>dispatch({
                 type:'ADD_DEPARTMENT',
                 payload:{
+                  ...state,
                     DepartmentName:e.target.value,
                 }
               })}/>
