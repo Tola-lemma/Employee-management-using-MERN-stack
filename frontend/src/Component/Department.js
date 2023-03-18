@@ -1,4 +1,4 @@
-import { useReducer, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { NavBar } from "../Navigation Bar/header";
 import axios from "axios";
 import { API_URL } from "../API_URL/API_URL";
@@ -27,12 +27,16 @@ const reducer = (state, action) => {
   }
 };
 export const DepartmentPage = () => {
+  useEffect(()=>{
+    getposts();
+  },[])
   const [department, setDepartment] = useState([]);
+  const getposts=()=>{
   //retrieve data
   axios.get(API_URL.DEPARTMENT).then((res) => {
     setDepartment(res.data);
   });
-
+  }
   const [state, dispatch] = useReducer(reducer, {
     modalTitle: "",
     DepartmentName: "",
@@ -99,7 +103,12 @@ const handleUpdate = (id) => {
          }
     };
     
-      
+      // useEffect(()=>{
+      //   setDepartment();
+      //   handleDelete();
+      //   handleUpdate();
+      //   handleCreate();
+      // },[])
   
 
   return (
