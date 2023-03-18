@@ -35,30 +35,30 @@ const reducer = (state, action) => {
   }
 };
 export const EmpoyeePage = () => {
-  useEffect(()=>{
+  useEffect(() => {
     getPosts();
     getPostDep();
-  },[])
+  }, []);
   const [employee, setEmployee] = useState([]);
-  const getPosts=()=>{
-  //fetching employee information
-  axios.get(API_URL.EMPLOYEE).then((res) => {
-    setEmployee(res.data);
-  });
-}
+  const getPosts = () => {
+    //fetching employee information
+    axios.get(API_URL.EMPLOYEE).then((res) => {
+      setEmployee(res.data);
+    });
+  };
   const [department, setDepartment] = useState([]);
-  const getPostDep=()=>{
-  axios.get(API_URL.DEPARTMENT).then((res) => {
-    setDepartment(res.data);
-  });
-}
+  const getPostDep = () => {
+    axios.get(API_URL.DEPARTMENT).then((res) => {
+      setDepartment(res.data);
+    });
+  };
   const [state, dispatch] = useReducer(reducer, {
     modalTitle: "",
     EmployeeId: 0,
     EmployeeName: "",
     Department: "",
     Date_of_Joining: "",
-    PhotoFileName: "anonymous.png",
+    PhotoFileName: "",
     photoPath: API_URL.photosPath,
   });
   const addClick = () => {
@@ -67,10 +67,10 @@ export const EmpoyeePage = () => {
       payload: {
         modalTitle: state.modalTitle,
         EmployeeId: state.EmployeeId,
-        EmployeeName: "",
-        Department: "",
+        EmployeeName:"",
+        Department:"",
         Date_of_Joining: "",
-        PhotoFileName: "anonymous.png",
+        PhotoFileName:"",
       },
     });
   };
@@ -88,29 +88,41 @@ export const EmpoyeePage = () => {
     });
   };
 
-  //    add employement 
-  const handleCreate= ()=>{
-     axios.post(API_URL.EMPLOYEE,
+  //    add employement
+  const handleCreate = () => {
+
+    const formData = new FormData();
+    formData.append('EmployeeName', state.EmployeeName);
+    formData.append('Department', state.Department);
+    formData.append('Date_of_Joining', state.Date_of_Joining);
+    formData.append('PhotoFileName', state.PhotoFileName);
+    axios.post(API_URL.EMPLOYEE, 
+        formData,
       {
-        EmployeeName: state.EmployeeName,
-        Department: state.Department,
-        Date_of_Joining: state.Date_of_Joining,
-        PhotoFileName: state.PhotoFileName,
+        headers: {
+        'Accept': 'application/json',
+       'Content-Type': 'application/json'
+        }
       })
-      
-      .then((res)=>{
-        console.log(res);
-        alert("The Employee is successfully added!")
-    },
-    (err)=>{console.log(err);
-      alert("Error while Creating Employee!")
-    })
-   }
+      .then((res) => {
+        alert("The Employee is successfully added!");
+      })
+      .catch((err) => {
+        console.error(err);
+        if (err.response) {
+          alert(`Error while Creating Employee: ${err.response.data.message}`);
+        } else if (err.request) {
+          alert("Error sending request. Please try again later.");
+        } else {
+          alert("Unknown error. Please try again later.");
+        }
+      });
+  };
   const imageUpload = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     const formData = new FormData();
     formData.append("file", e.target.files[0]);
-   axios
+    axios
       .post(API_URL.PROFILEPHOTO, formData)
       .then((res) => {
         // console.log(res);
@@ -127,14 +139,12 @@ export const EmpoyeePage = () => {
         alert("Error while uploading image");
       });
   };
- 
 
   const handleUpdate = (id) => {
     employee.map(
       (emp) =>
-        emp.EmployeeId === id &&(
-        axios
-          .put(`${API_URL.EMPLOYEE}${emp._id}`, {
+        emp.EmployeeId === id &&
+        (axios.put(`${API_URL.EMPLOYEE}${emp._id}`, {
             EmployeeName: state.EmployeeName,
             Department: state.Department,
             Date_of_Joining: state.Date_of_Joining,
@@ -159,7 +169,6 @@ export const EmpoyeePage = () => {
       );
     }
   };
-  
 
   return (
     <div className="table-responsive navbarCustom">
@@ -176,11 +185,11 @@ export const EmpoyeePage = () => {
       <table className="table table-hover table-sm text-center">
         <thead className="bg-info">
           <tr>
-          <th>EmployeeId</th>
-          <th>EmployeeName</th>
-          <th>Department</th>
-          <th>Date of Joining</th>
-          <th>Actions</th>
+            <th>EmployeeId</th>
+            <th>EmployeeName</th>
+            <th>Department</th>
+            <th>Date of Joining</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -247,16 +256,16 @@ export const EmpoyeePage = () => {
                     <input
                       type="text"
                       className="form-control"
-                      value={state.EmployeeName}
                       onChange={(e) =>
                         dispatch({
                           type: "ADD_EMPLOYEE",
                           payload: {
+                            ...state,
                             EmployeeName: e.target.value,
                           },
                         })
                       }
-                    />
+                    value={state.EmployeeName}/>
                   </div>
                   <div className="input-group mb-3">
                     <span className="input-group-text">Deparment:</span>
@@ -266,6 +275,7 @@ export const EmpoyeePage = () => {
                         dispatch({
                           type: "ADD_EMPLOYEE",
                           payload: {
+                            ...state,
                             Department: e.target.value,
                           },
                         })
@@ -301,9 +311,7 @@ export const EmpoyeePage = () => {
                     alt=""
                     src={`${state.photoPath}${state.PhotoFileName}`}
                   />
-                  <input className="m-2" type="file"
-                  onChange={imageUpload} 
-                  />
+                  <input className="m-2" type="file" onChange={imageUpload}/>
                 </div>
               </div>
               {/* button to update department  */}
