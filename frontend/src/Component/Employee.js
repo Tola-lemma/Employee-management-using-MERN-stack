@@ -187,6 +187,7 @@ export const EmpoyeePage = () => {
           <tr>
             <th>EmployeeId</th>
             <th>EmployeeName</th>
+            <th>profile photo</th>
             <th>Department</th>
             <th>Date of Joining</th>
             <th>Actions</th>
@@ -197,6 +198,7 @@ export const EmpoyeePage = () => {
             <tr key={emp._id}>
               <td data-title="ID">{emp.EmployeeId}</td>
               <td data-title="Name">{emp.EmployeeName}</td>
+              <td><img className="rounded-circle profileImage" src={state.photoPath+emp.PhotoFileName} alt=""/></td>
               <td data-title="department">{emp.Department}</td>
               <td data-title="date_of_joining">{emp.Date_of_Joining}</td>
               <td data-title="Action">
