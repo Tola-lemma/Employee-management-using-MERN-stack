@@ -11,3 +11,7 @@
 .rounded-pill:hover{
 background-color: white;
 }
+.profileImage{
+width: 30px;
+height: 30px;
+}
