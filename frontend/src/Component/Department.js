@@ -102,15 +102,6 @@ const handleUpdate = (id) => {
             );
          }
     };
-    
-      // useEffect(()=>{
-      //   setDepartment();
-      //   handleDelete();
-      //   handleUpdate();
-      //   handleCreate();
-      // },[])
-  
-
   return (
     <div className="table-responsive navbarCustom">
       <NavBar />
