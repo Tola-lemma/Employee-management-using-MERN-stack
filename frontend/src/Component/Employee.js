@@ -2,8 +2,7 @@ import axios from "axios";
 import { useEffect, useReducer, useState } from "react";
 import { API_URL } from "../API_URL/API_URL";
 import { NavBar } from "../Navigation Bar/header";
-
-const reducer = (state, action) => {
+ const reducer = (state, action) => {
   switch (action.type) {
     case "ADD_EMPLOYEE":
       return {
