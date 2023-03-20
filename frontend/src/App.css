@@ -15,3 +15,16 @@ background-color: white;
 width: 30px;
 height: 30px;
 }
+.homepage{
+  text-align: center;
+  background-image: url('./assets/images/loginbackground.jpg');
+  color: white;
+  height: 494px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.viewformargin{
+  margin-top: 16rem;
+  margin-left: 5rem;
+}
