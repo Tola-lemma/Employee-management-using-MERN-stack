@@ -23,6 +23,7 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-fileupload": "^1.4.0",
+    "md5": "^2.3.0",
     "mongoose": "^7.0.1",
     "mongoose-encryption": "^2.1.2",
     "morgan": "^1.10.0",
