@@ -18,8 +18,6 @@ const fileUploading = require('../Controller/fileupload')
 router.post('/api/fileupload',fileUploading.EmployeeProfile)
 //user
 const user = require('../Controller/user_controller');
-const Auth = require('../middleware/auth');
-const auth = require('../middleware/auth');
 router.post('/api/register',user.CreateUser)
 router.post('/api/login',user.UserLogin);
 module.exports = router
