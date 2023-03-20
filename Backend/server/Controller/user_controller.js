@@ -53,4 +53,10 @@ exports.UserLogin = async (req, res) => {
       res.status(500).send('Internal server error.');
     }
   };
+
+  exports.getUser=(req,res)=>{
+    Userdb.findById(req.user.id)
+           .select('-password')
+           .then((user)=>{res.json(user)})
+  }
   
