@@ -154,7 +154,7 @@ export const EmpoyeePage = () => {
               alert("You are Succeccfully Update Employee!");
             },
             (err) =>
-              alert("Error while Updating the Employee! ,please try again")
+              alert(`Error while Updating the Employee! ,please try again ${err.response.data.message}`)
           ))
     );
   };
@@ -164,7 +164,7 @@ export const EmpoyeePage = () => {
         (res) => {
           alert("You are Successfully Delete Employee !");
         },
-        (err) => alert("Error While Deleting Employee,try again!")
+        (err) => alert(`Error While Deleting Employee,try again! ${err.response.data.message}`)
       );
     }
   };

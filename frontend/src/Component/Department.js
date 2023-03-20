@@ -68,7 +68,7 @@ export const DepartmentPage = () => {
    const handleCreate=()=>{
     axios.post(API_URL.DEPARTMENT,{DepartmentName:state.DepartmentName}).then((res)=>{
         alert("The Department is successfully added!")
-    },(err)=>alert("Error while Creating Deparment!"))
+    },(err)=>alert(`Error while Creating Deparment ${err.response.data.message}`))
    }
 //update department
 const handleUpdate = (id) => {
@@ -83,7 +83,7 @@ const handleUpdate = (id) => {
             alert("Department updated successfully!");
           },
           (err) => {
-            alert("Error while updating the department, please try again!");
+            alert(`Error while updating the department, please try again ${err.response.data.message}`);
           }
         )
   );
@@ -99,7 +99,7 @@ const handleUpdate = (id) => {
               alert("Department deleted successfully!");
             },
             (err) => {
-              alert("Error while deleting the department, maybe incorrect id !");
+              alert(`Error while deleting the department, maybe incorrect id ! ${err.response.data.message}`);
             }
             );
          }
