@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-var encrypt = require('mongoose-encryption');
 var User = new mongoose.Schema({
    email:{
     type:String,
@@ -12,8 +11,6 @@ var User = new mongoose.Schema({
    }
 },
 {collection:'Userdbs'})
-
-User.plugin(encrypt, { secret: process.env.SECRET,encryptedFields: ['password'] });
 
 const Userdb=mongoose.model('Userdb',User)
 module.exports = Userdb;
