@@ -3,7 +3,7 @@
 }
 .navbarCustom{
   margin: 20px;
-  margin-top: 5px;
+  margin-top: 2px;
 }
 .table-hover tbody tr:hover td {
   background: #06d6a0;
@@ -18,8 +18,7 @@ height: 30px;
 .homepage{
   text-align: center;
   background-image: url('./assets/images/loginbackground.jpg');
-  color: white;
-  height: 494px;
+  height: 500px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -27,4 +26,13 @@ height: 30px;
 .viewformargin{
   margin-top: 16rem;
   margin-left: 5rem;
+}
+.Logout{
+  border: none;
+  margin-left: 55rem;
+  border-radius: 50%;
+}
+.LogoutLink{
+  border: none;
+  border-radius: 50%;
 }
