@@ -37,6 +37,7 @@ const navigate=useNavigate()
     password: "",
     userID:0,
     token: "",
+    // isAuthenticated:true
   });
   const registerClick = () => {
     dispatch({
@@ -54,21 +55,38 @@ const navigate=useNavigate()
       },
     });
   };
-  const handleLogin =()=>{
+  const handleRegister = async (e)=>{
+    e.preventDefault();
+try {
+  const response = await axios.post(API_URL.REGISTER,
+    {
+      email:state.email,
+      password:state.password
+    })
+    localStorage.setItem('token',response.data.token)
+    alert('You are Successfully registered')
+    navigate('/department')  
+    window.location.reload();
+} catch (err) {
+  alert("Error While register  please provide correct email and password ! "||err.response.data);
+}
+  }
+
+  const handleLogin =async (e)=>{
+    e.preventDefault();
    try{
-    axios.post(API_URL.LOGIN,
+  const result = await axios.post(API_URL.LOGIN,
       {
         email:state.email,
         password:state.password
       })
-      .then((result)=>{
- //  console.log(response.data.token);
      localStorage.setItem('token',result.data.token);
-      })   
-  navigate('/department')
+     alert('You are logged in successfully!');
+     navigate('/department')  
+     window.location.reload();
    } 
    catch(err){
-    alert(err.message);
+    alert("Error While login please provide correct email and password ! "||err.response.data);
    }
   }
   return (
@@ -130,7 +148,7 @@ const navigate=useNavigate()
                <button 
                      type="button" 
                      className="btn btn-primary" 
-                    //  onClick={handleRegister}
+                     onClick={handleRegister}
                      >
                   {state.modalTitle}
                 </button>
