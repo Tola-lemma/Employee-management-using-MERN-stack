@@ -26,7 +26,8 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.1",
     "morgan": "^1.10.0",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "validator": "^13.9.0"
   },
   "devDependencies": {
     "@types/dateformat": "^5.0.0"
