@@ -78,6 +78,7 @@ export const DepartmentPage = () => {
         }
       ).then((res)=>{
         alert("The Department is successfully added!")
+     window.location.reload();
     },(err)=>alert(`Error while Creating Deparment ${err.response.data.message}`))
    }
 //update department
@@ -96,6 +97,7 @@ const handleUpdate = (id) => {
         .then(
           (res) => {
             alert("Department updated successfully!");
+            window.location.reload();
           },
           (err) => {
             alert(`Error while updating the department, please try again ${err.response.data.message}`);
@@ -116,6 +118,7 @@ const handleUpdate = (id) => {
           .then(
             (res) => {
               alert("Department deleted successfully!");
+              window.location.reload();
             },
             (err) => {
               alert(`Error while deleting the department, maybe incorrect id ! ${err.response.data.message}`);
