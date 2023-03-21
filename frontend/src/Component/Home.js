@@ -29,7 +29,7 @@ const reducer = (state, action) => {
   }
 };
 export const HomePage = () => {
-  
+
 const navigate=useNavigate()
   const [state, dispatch] = useReducer(reducer, {
     modalTitle: "",
@@ -37,7 +37,6 @@ const navigate=useNavigate()
     password: "",
     userID:0,
     token: "",
-    // isAuthenticated:true
   });
   const registerClick = () => {
     dispatch({
