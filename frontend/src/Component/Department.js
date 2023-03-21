@@ -33,7 +33,11 @@ export const DepartmentPage = () => {
   const [department, setDepartment] = useState([]);
   const getposts=()=>{
   //retrieve data
-  axios.get(API_URL.DEPARTMENT).then((res) => {
+  axios.get(API_URL.DEPARTMENT,{
+    headers: {
+      'x-auth-token': localStorage.getItem('token')
+    }
+  }).then((res) => {
     setDepartment(res.data);
   });
   }
@@ -66,7 +70,13 @@ export const DepartmentPage = () => {
    }
 //    add department 
    const handleCreate=()=>{
-    axios.post(API_URL.DEPARTMENT,{DepartmentName:state.DepartmentName}).then((res)=>{
+    axios.post(API_URL.DEPARTMENT,{DepartmentName:state.DepartmentName},
+         {
+        headers: {
+          'x-auth-token': localStorage.getItem('token')
+        }
+        }
+      ).then((res)=>{
         alert("The Department is successfully added!")
     },(err)=>alert(`Error while Creating Deparment ${err.response.data.message}`))
    }
@@ -77,7 +87,12 @@ const handleUpdate = (id) => {
       axios
         .put(`${API_URL.DEPARTMENT}${dep._id}`, {
           DepartmentName: state.DepartmentName,
-        })
+        },{
+          headers: {
+            'x-auth-token': localStorage.getItem('token')
+          }
+        }
+        )
         .then(
           (res) => {
             alert("Department updated successfully!");
@@ -93,7 +108,11 @@ const handleUpdate = (id) => {
    const handleDelete = (id) => {
     if(window.confirm('Are you Sure you want to delete ?')){
         axios
-          .delete(`${API_URL.DEPARTMENT}${id}`)
+          .delete(`${API_URL.DEPARTMENT}${id}`,{
+            headers: {
+              'x-auth-token': localStorage.getItem('token')
+            }
+          })
           .then(
             (res) => {
               alert("Department deleted successfully!");

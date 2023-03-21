@@ -1,24 +1,42 @@
+import axios from "axios";
 import { useReducer } from "react";
+import { useNavigate } from "react-router-dom";
+import { API_URL } from "../API_URL/API_URL";
+
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case "INPUT":
+      return {
+        ...state,
+        email:action.payload.email,
+        password:action.payload.password
+      };
     case "REGISTER":
       return {
         ...state,
         modalTitle: "Register",
+        userID:0
       };
     case "LOGIN":
       return {
         ...state,
         modalTitle: "Login",
+        userID:""
       };
     default:
       return state;
   }
 };
 export const HomePage = () => {
+  
+const navigate=useNavigate()
   const [state, dispatch] = useReducer(reducer, {
     modalTitle: "",
+    email:"",
+    password: "",
+    userID:0,
+    token: "",
   });
   const registerClick = () => {
     dispatch({
@@ -36,9 +54,26 @@ export const HomePage = () => {
       },
     });
   };
+  const handleLogin =()=>{
+   try{
+    axios.post(API_URL.LOGIN,
+      {
+        email:state.email,
+        password:state.password
+      })
+      .then((result)=>{
+ //  console.log(response.data.token);
+     localStorage.setItem('token',result.data.token);
+      })   
+  navigate('/department')
+   } 
+   catch(err){
+    alert(err.message);
+   }
+  }
   return (
     <div className="homepage">
-      <h1>Home Page</h1>
+      <h1 style={{color:"white"}}>Home Page</h1>
       <div className="modal" tabIndex="-1" id="exampleModal">
         <div className="modal-dialog">
           <div className="modal-content">
@@ -51,13 +86,20 @@ export const HomePage = () => {
                 aria-label="Close"
               ></button>
             </div>
-            <form>
             <div className="modal-body">
               <div className="input-group mb-3">
-                 <span className="input-group-text">Email address</span>
+                 <span className="input-group-text">Email</span>
                   <input
                     type="email"
                     className="form-control"
+                    value={state.email}
+                    onChange={(e)=>dispatch({
+                      type:'INPUT',
+                      payload:{
+                       ...state,
+                       email:e.target.value
+                      }
+               })}
                    />
               </div>
             <div className="input-group mb-3">
@@ -65,6 +107,14 @@ export const HomePage = () => {
                   <input
                     type="password"
                     className="form-control"
+                    value={state.password}
+                    onChange={(e)=>dispatch({
+                           type:'INPUT',
+                           payload:{
+                            ...state,
+                            password:e.target.value
+                           }
+                    })}
                   />
             </div>
             </div>
@@ -76,11 +126,25 @@ export const HomePage = () => {
                 >
                   Cancel
                 </button>
-                <button type="submit" className="btn btn-primary">
+               {state.userID===0?
+               <button 
+                     type="button" 
+                     className="btn btn-primary" 
+                    //  onClick={handleRegister}
+                     >
                   {state.modalTitle}
                 </button>
+                :null} 
+                 {state.userID!==0?
+               <button 
+                     type="button" 
+                     className="btn btn-primary" 
+                     onClick={handleLogin}
+                     >
+                  {state.modalTitle}
+                </button>
+                :null} 
               </div>
-            </form>
           </div>
         </div>
       </div>
