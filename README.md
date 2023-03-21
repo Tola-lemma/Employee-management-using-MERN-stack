@@ -1,5 +1,5 @@
 # Employee Management System
-This is a web application for managing employees and departments using the MERN stack (MongoDB, Express, React, Node.js).
+This is a web application for managing employees and departments using the MERN stack (MongoDB, Express, React, Node.js) and Authentication and Authorization with JWT(jsonwebtoken)
 
 # Features
 - Add new departments
@@ -9,6 +9,7 @@ This is a web application for managing employees and departments using the MERN 
 - View employee details
 - Update employee details
 - Delete employees
+- All routes are Authorized
 # Prerequisites
 - Node.js 
 - MongoDB 
@@ -23,6 +24,10 @@ git clone https://github.com/Tola-lemma/Employee-management-using-MERN-stack.git
      Start the server:
 `npm run server`
 # Screenshots
+ <strong> Registeration page</strong>
+ <img src="Backend/public/images/RegisterPage.jpg" alt="">
+     <strong> Login page</strong>
+  <img src="Backend/public/images/login.jpg" alt="">
   <strong> Department page</strong>
 <img src="Backend/public/images/DepPage.jpg" alt="">
 <strong> Employee page</strong>
