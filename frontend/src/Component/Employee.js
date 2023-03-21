@@ -118,6 +118,7 @@ export const EmpoyeePage = () => {
       })
       .then((res) => {
         alert("The Employee is successfully added!");
+        window.location.reload();
       })
       .catch((err) => {
         console.error(err);
@@ -171,6 +172,7 @@ export const EmpoyeePage = () => {
           .then(
             (res) => {
               alert("You are Succeccfully Update Employee!");
+              window.location.reload();
             },
             (err) =>
               alert(`Error while Updating the Employee! ,please try again ${err.response.data.message}`)
@@ -188,6 +190,7 @@ export const EmpoyeePage = () => {
       ).then(
         (res) => {
           alert("You are Successfully Delete Employee !");
+          window.location.reload();
         },
         (err) => alert(`Error While Deleting Employee,try again! ${err.response.data.message}`)
       );
