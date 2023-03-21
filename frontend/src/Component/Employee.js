@@ -41,13 +41,25 @@ export const EmpoyeePage = () => {
   const [employee, setEmployee] = useState([]);
   const getPosts = () => {
     //fetching employee information
-    axios.get(API_URL.EMPLOYEE).then((res) => {
+    axios.get(API_URL.EMPLOYEE,
+      {
+        headers: {
+          'x-auth-token': localStorage.getItem('token')
+        }
+      }
+      ).then((res) => {
       setEmployee(res.data);
     });
   };
   const [department, setDepartment] = useState([]);
   const getPostDep = () => {
-    axios.get(API_URL.DEPARTMENT).then((res) => {
+    axios.get(API_URL.DEPARTMENT,
+      {
+        headers: {
+          'x-auth-token': localStorage.getItem('token')
+        }
+      }
+      ).then((res) => {
       setDepartment(res.data);
     });
   };
@@ -100,7 +112,8 @@ export const EmpoyeePage = () => {
       {
         headers: {
         'Accept': 'application/json',
-       'Content-Type': 'application/json'
+       'Content-Type': 'application/json',
+       'x-auth-token': localStorage.getItem('token')
         }
       })
       .then((res) => {
@@ -148,7 +161,13 @@ export const EmpoyeePage = () => {
             Department: state.Department,
             Date_of_Joining: state.Date_of_Joining,
             PhotoFileName: state.PhotoFileName,
-          })
+          },
+          {
+            headers: {
+              'x-auth-token': localStorage.getItem('token')
+            }
+          }
+          )
           .then(
             (res) => {
               alert("You are Succeccfully Update Employee!");
@@ -160,7 +179,13 @@ export const EmpoyeePage = () => {
   };
   const handleDelete = (id) => {
     if (window.confirm("Are you sure you want to delete Employee?")) {
-      axios.delete(`${API_URL.EMPLOYEE}${id}`).then(
+      axios.delete(`${API_URL.EMPLOYEE}${id}`,
+      {
+        headers: {
+          'x-auth-token': localStorage.getItem('token')
+        }
+      }
+      ).then(
         (res) => {
           alert("You are Successfully Delete Employee !");
         },
