@@ -4,7 +4,7 @@ var jwt = require('jsonwebtoken');
 const saltRounds = 10;
 exports.CreateUser = (req,res)=>{
   if(!req.body){
-    res.status(404).send({message:"Fields cannot be Empty!"});
+    res.status(404).send({message:"Fields cannot be Empty!"||err.message});
     return
   }
   bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
@@ -26,7 +26,7 @@ exports.CreateUser = (req,res)=>{
         )
        })
        .catch((err)=>{
-        res.status(500).json({ message: 'Error while creating User' });
+        res.status(500).json({ message: 'Error while creating User'||err.message });
     });
 });
 }
@@ -46,11 +46,10 @@ exports.UserLogin = async (req, res) => {
                      .json({token,foundUser})
                     })
       }else{
-    res.status(401).send('Invalid credentials.');
+    res.status(401).json('Invalid credentials.');
     }   
     } catch (error) {
-      console.log(error);
-      res.status(500).send('Internal server error.');
+      res.status(500).json('Internal server error.'||error.message);
     }
   };
 
