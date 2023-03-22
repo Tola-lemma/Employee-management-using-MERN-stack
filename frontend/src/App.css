@@ -36,3 +36,26 @@ height: 30px;
   border: none;
   border-radius: 50%;
 }
+/* table responsive  */
+@media  only screen and (max-width: 768px){
+  .table-responsive tbody,.table-responsive tr, .table-responsive td{
+display: block;
+text-align: left;
+border: 1px solid black;
+  }
+  .table-responsive thead tr{
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+  }
+  .table-responsive td{
+      position: relative;
+      padding-left: 50%;
+  }
+  .table-responsive td::before{
+    content: attr(data-title);
+    position: absolute;
+    left: 6px;
+    font-weight: bold;
+  }
+}
